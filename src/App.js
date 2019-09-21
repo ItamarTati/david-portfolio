@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import PageOne from './PageOne';
-import PageTwo from './PageTwo';
-import PageThree from './PageThree';
+import Data from './Data'
+import Slide from './Slide'
 
-
-
+let games = Data()
 class App extends Component {
     constructor(props) {
         super(props);
@@ -57,30 +55,30 @@ class App extends Component {
           
 
           <div className = 'App' >
-          <h1>David Bud</h1>
-          <h2>Game Designer</h2>
-					<p>Hi my name is David, I am a Passionate Games Designer that uses C#, JavaScript and Unity. I enjoy learning and challenging myself to be a better designer</p>
-          <p>If you're intrested in working with me please find contact details on the about me page</p> 
+          <h1>{games.profile.name}</h1>
+          <h2>{games.profile.title}</h2>
+					<p>{games.profile.title}</p>
 
           {page === 1 ? <ul >
-                            <li ><button>Game 1</button></li>
-                            <li ><button onClick = {this.goToPageTwo}>Game 2</button></li>
-                            <li ><button onClick = {this.goToPageThree}>Game 3</button></li>
+                            <li ><button>{games.gameOne.name}</button></li>
+                            <li ><button onClick = {this.goToPageTwo}>{games.gameTwo.name}</button></li>
+                            <li ><button onClick = {this.goToPageThree}>{games.gameThree.name}</button></li>
                           </ul>: 
             page === 2 ? <ul >
-                            <li ><button onClick = {this.goToPageOne}>Game 1</button></li>
-                            <li ><button>Game 2</button></li>
-                            <li ><button onClick = {this.goToPageThree}>Game 3</button></li>
+                            <li ><button onClick = {this.goToPageOne}>{games.gameOne.name}</button></li>
+                            <li ><button>{games.gameTwo.name}</button></li>
+                            <li ><button onClick = {this.goToPageThree}>{games.gameThree.name}</button></li>
                          </ul>:
                          <ul >
-                            <li ><button onClick = {this.goToPageOne}>Game 1</button></li>
-                            <li ><button onClick = {this.goToPageTwo}>Game 2</button></li>
-                            <li ><button >Game 3</button></li>
+                            <li ><button onClick = {this.goToPageOne}>{games.gameOne.name}</button></li>
+                            <li ><button onClick = {this.goToPageTwo}>{games.gameTwo.name}</button></li>
+                            <li ><button >{games.gameThree.name}</button></li>
                           </ul>} 
             
-          {page === 1 && <PageOne  />}
-            {page === 2 && <PageTwo  />}
-            {page === 3 && <PageThree  /> }
+            {page === 1 && <Page name={games.gameOne.name} description={games.gameOne.description} instructions={games.gameOne.instructions}/>} 
+            {page === 2 && <Page  name={games.gameTwo.name} description={games.gameTwo.description} instructions={games.gameTwo.instructions}/>}
+            {page === 3 && <Page  name={games.gameThree.name} description={games.gameThree.description} instructions={games.gameThree.instructions}/> }
+
             <button onClick = {this.prevPage}>previous page</button>
             <button onClick = {this.nextPage}>next page</button> 
 
@@ -91,10 +89,23 @@ class App extends Component {
     }
   }
 
+function Page(props){
+  return (
+    <div>
+      <h3>{props.name}</h3>
+      <p>{props.description}</p>
+      <Slide />
+      <p>{props.instructions}</p>
 
+    </div>
+  )
+}
   
   
   export default App;
+
+
+
 
 
 
